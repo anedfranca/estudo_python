@@ -10,11 +10,11 @@ with open("palavras.txt", "r") as arquivo:
         lista_palavras.append(palavra.strip()) # Limpa os caracteres em branco e as quebras de linha
 
 palavra_escolhida = choice(lista_palavras)
-print (palavra_escolhida)
 
 #########################################################
 
 #criptografa a palavra
+print("\nSua palavra: ", end=" ")
 numero_letras = (len(palavra_escolhida))
 for i in range (numero_letras):
     print('_', end=' ')
@@ -26,9 +26,29 @@ print()
 
 contador_erros = 0
 while True:
-    palpite = input('Digite uma letra: ')
+    if (contador_erros == 6):
+        break
+
+    palpite = input('\nDigite uma letra: ')
+
+    # Validar o meu palpite
+    if (palpite not in lista_palpites):
+        print("valido")
+    if (len(palpite) == 1):
+        print("valido")
+
+
     lista_palpites.append(palpite)
-    print(lista_palpites)
+    lista_palpites.sort()
+
+    # printa a palavra criptografada
+    print()
+    for letra in palavra_escolhida:
+        if letra in lista_palpites:
+            print(letra, end = ' ')
+        else:
+            print('_', end = ' ')
+    print("\n")
 
 
     ##############################################################
@@ -42,8 +62,13 @@ while True:
             print(i, end="")
     print("\n")
 
+    # Mostra os chutes já realizados
+    print("\nChutes realizados: ", end="| ")
+    for chute in lista_palpites:
+        print(f"{chute} | ", end='')
 
 
+print(f'Fim de jogo, a palavra era: {palavra_escolhida}')
 
 
 
